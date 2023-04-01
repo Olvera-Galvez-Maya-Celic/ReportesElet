@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
+    <body class="p-10">
         <hr>
         <h2><center><b>Pagina del Ingeniero</b></center></h2>
         </hr>
@@ -20,7 +20,10 @@
         
         <h2><center><b><br><br>Cambios al reporte y estatus</br></br></b></center></h2>
         <form action="#">
-
+            <%
+                String case_desc=request.getParameter("case_desc");
+                String report_status = request.getParameter("case_status");
+            %>
     <div class="mt-2">
       <div id="tabs-1-panel-1" class="-m-0.5 rounded-lg p-0.5" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
         <label for="comment" class="sr-only">Comment</label>
@@ -30,7 +33,7 @@
       </div>
       <div id="tabs-1-panel-2" class="-m-0.5 rounded-lg p-0.5" aria-labelledby="tabs-1-tab-2" role="tabpanel" tabindex="0">
         <div class="border-b">
-          <div class="mx-px mt-px px-3 pt-2 pb-12 text-sm leading-5 text-gray-800">Vista Previa.</div>
+          <div class="mx-px mt-px px-3 pt-2 pb-12 text-sm leading-5 text-gray-800"><%=case_desc%></div>
         </div>
       </div>
     </div>
@@ -50,7 +53,7 @@
     <form class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
       <div>
         <div>
-          <h2 class="text-lg font-medium text-gray-900">Cambio de estatus</h2>
+          <h2 class="text-lg font-medium text-gray-900">Cambio de estatus <br/><%=report_status%></h2>
 
           
 
@@ -89,3 +92,5 @@
     </form>
   </div>
 </div>
+    
+</body>
