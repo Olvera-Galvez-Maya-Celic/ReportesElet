@@ -43,7 +43,9 @@
 
                                                         </div>
                                                     </div>
-                                                    <%
+                                                    
+                                                    
+                                                    <% //Conexión a la bdd
                                                         Class.forName("com.mysql.jdbc.Driver");
                                                         Connection dbConnection = null;
                                                         try {
@@ -54,7 +56,7 @@
                                                             Statement statement = null;
                                                             ResultSet rs = null;
                                                             statement = dbConnection.createStatement();
-                                                            String SQLQuery = "SELECT admin_id,case_id,case_name,case_desc,case_status,case_creation_date FROM tbl_case_admin "
+                                                            String SQLQuery = "SELECT id_case_admin,admin_id,case_id,case_name,case_desc,case_status,case_creation_date,case_solution FROM tbl_case_admin "
                                                             + "INNER JOIN tbl_cases ON tbl_case_admin.case_id = tbl_cases.id_case;";
                                                             rs = statement.executeQuery(SQLQuery);
                                                         
@@ -70,6 +72,7 @@
                                                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">ID del reporte</th>
                                                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nombre del caso</th>
                                                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estatus</th>
+                                                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Solución del reporte</th>
                                                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha de creación</th>
 
                                                                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -89,15 +92,17 @@
                                                                                     String status_report = rs.getString("case_status");
                                                                                     String last_update_date = rs.getString("case_creation_date");
                                                                                     String case_desc = rs.getString("case_desc");
+                                                                                    String case_solution = rs.getString("case_solution");
                                                                             %>
                                                                             <tr>
                                                                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%=id_usuario%></td> <!--En vez de id_user vas a poner el nombre de la variable en Java que vas a desplegar -->                                                                                
                                                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%=id_case%></td>
                                                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%=report_name%></td>
                                                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%=status_report%></td>
+                                                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%=case_solution%></td>
                                                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%=last_update_date%><a href=""><span class="sr-only">Editar</span></a></td>
                                                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                                                    <a href="IngMayita.jsp?case_desc=<%=case_desc%>&case_status=<%=status_report%>">Editar</a>  
+                                                                                    <a href="IngMayita.jsp?case_id=<%=id_case%>">Editar</a>  
                                                                                 </td>
                                                                             </tr>                
                                                                             <%
